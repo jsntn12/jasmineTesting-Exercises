@@ -19,7 +19,6 @@ function submitServerInfo(evt) {
     allServers['server' + serverId] = { serverName };
 
     updateServerTable();
-
     serverNameInput.value = '';
   }
 }
@@ -38,7 +37,9 @@ function updateServerTable() {
 
     appendTd(newTr, curServer.serverName);
     appendTd(newTr, '$' + tipAverage.toFixed(2));
+    appendDeleteBtn(newTr, "server")
 
     serverTbody.append(newTr);
   }
 }
+
