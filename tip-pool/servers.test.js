@@ -1,6 +1,5 @@
 describe("Servers test (with setup and tear-down)", function() {
   beforeEach(function () {
-    // initialization logic
     serverNameInput.value = 'Alice';
   });
 
@@ -11,33 +10,28 @@ describe("Servers test (with setup and tear-down)", function() {
     expect(allServers['server' + serverId].serverName).toEqual('Alice');
   });
 
-it("should not add a new server with an empty str", function(){
-  serverNameInput = "";
-  submitServerInfo();
-  expect(Object.keys(allServers).length).toEqual(0);
-})
+  it('should not add a new server on submitServerInfo() with empty input', function () {
+    serverNameInput.value = '';
+    submitServerInfo();
 
-it("should create table centent and update server table", function(){
-  serverNameInput.value = "Alice";
+    expect(Object.keys(allServers).length).toEqual(0);
+  });
 
-  submitServerInfo();
-  updateServerTable();
-  let curTDList = document.querySelectorAll('#serverTable tbody tr td');
+  it('should update #servertable on updateServerTable()', function () {
+    submitServerInfo();
+    updateServerTable();
 
-  expect(curTdList.length).toEqual(3);
-  expect(curTdList[0].innerText).toEqual('Alice');
-  expect(curTdList[1].innerText).toEqual('$0.00');
-  expect(curTdList[2].innerText).toEqual('X');
+    let curTdList = document.querySelectorAll('#serverTable tbody tr td');
 
-  console.log(curTDList)
-})
-
+    expect(curTdList.length).toEqual(3);
+    expect(curTdList[0].innerText).toEqual('Alice');
+    expect(curTdList[1].innerText).toEqual('$0.00');
+    expect(curTdList[2].innerText).toEqual('X');
+  });
 
   afterEach(function() {
-    serverNameInput.value = '';
     serverId = 0;
     serverTbody.innerHTML = '';
-    allServers ={};
+    allServers = {};
   });
-  
 });
